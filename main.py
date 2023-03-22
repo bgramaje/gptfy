@@ -67,8 +67,8 @@ new_tracks = eval(response.choices[0].message['content'])
 # transform trackname into trackids
 track_ids = [f'spotify:track:{sp.search(q=track, limit=1, type="track")["tracks"]["items"][0]["id"]}' for track in new_tracks] 
 
-for track in track_ids:
-    print(track)
+# for track in track_ids:
+#     print(track)
     
 # create new playlist
 playlist = sp.user_playlist_create(user=sp.current_user()['id'], name='gptfy-ai-list', public=True)    
