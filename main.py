@@ -1,6 +1,7 @@
 import spotipy
 import openai
 import os
+import sys
 
 from datetime import datetime, timedelta
 from spotipy.oauth2 import SpotifyOAuth
@@ -17,16 +18,18 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     client_id=os.environ.get('CLIENT_ID'),
     client_secret=os.environ.get('CLIENT_SECRET'),
     redirect_uri=os.environ.get('REDIRECT_URI'),
-    scope="user-read-recently-played"
+    scope=os.environ.get('SCOPE'),
 ))
 
 # date from today substracted a month
 start_date = datetime.now() - timedelta(days=30)
 # convert date into format ISO string
 start_date_iso = start_date.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+print(f"[spotipy]: Obtaining last recently played sonfs after {start_date_iso}")
 
 # get recent tracks played after provided date
-tracks = sp.current_user_recently_played(after=start_date_iso)
+tracks = sp.current_user_recently_played(after=start_date_iso, limit=50)
+print(f"[spotipy]: Founded {len(tracks)} tracks that has been recently played since {start_date_iso}")
 
 # pre-training chatgpt open-ai
 messages = [
@@ -61,16 +64,23 @@ response = openai.ChatCompletion.create(
     messages = messages,
     stop=['info']
 )
-
-# obtain new_tracks
-new_tracks = eval(response.choices[0].message['content'])
-# transform trackname into trackids
-track_ids = [f'spotify:track:{sp.search(q=track, limit=1, type="track")["tracks"]["items"][0]["id"]}' for track in new_tracks] 
-
-# for track in track_ids:
-#     print(track)
+try: 
+    # TODO: Clean string with accents and double/single quotes that can appear in the track_name
+    # obtain new_tracks
+    new_tracks = eval(response.choices[0].message['content'])
+    print(f"[openai]: Founded {len(new_tracks)} tracks to be added")
     
-# create new playlist
-playlist = sp.user_playlist_create(user=sp.current_user()['id'], name='gptfy-ai-list', public=True)    
-# add provided chatgpt songs into playlist
-sp.playlist_add_items(playlist_id= playlist['id'], items=track_ids)
+    # transform track_name into track_id
+    track_ids = [f'spotify:track:{sp.search(q=track, limit=1, type="track")["tracks"]["items"][0]["id"]}' for track in new_tracks] 
+    
+    # create new playlist
+    playlist = sp.user_playlist_create(user=sp.current_user()['id'], name='gptfy-ai-list', public=True)   
+    print(f"[spotipy]: Creating new playlist '{playlist['id']}' into spotify")
+    
+    # add provided chatgpt songs into playlist
+    sp.playlist_add_items(playlist_id=playlist['id'], items=track_ids)
+    print(f"[spotipy]: Tracks provided by ChatGTP added succesfully into the playlist '{playlist['id']}'")
+except Exception as e:
+    print(e)
+    sys.exit(0)
+    
