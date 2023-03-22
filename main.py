@@ -28,6 +28,8 @@ load_dotenv()
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     client_id=os.environ.get('CLIENT_ID'),
     client_secret=os.environ.get('CLIENT_SECRET'),
+    redirect_uri='http://localhost:3000',
+    scope="user-read-recently-played"
 ))
 
 # Definir la fecha de inicio y fin del período de tiempo que quieres consultar
@@ -39,7 +41,8 @@ start_date_iso = start_date.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 end_date_iso = end_date.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
 # Obtener las canciones que has escuchado en el período de tiempo especificado
-results = sp.current_user_recently_played(after=start_date_iso, before=end_date_iso)
+results = sp.current_user_recently_played(
+    after=start_date_iso, before=end_date_iso)
 
 # Iterar sobre la lista de canciones y obtener información relevante
 for item in results['items']:
