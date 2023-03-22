@@ -64,6 +64,7 @@ response = openai.ChatCompletion.create(
     messages = messages,
     stop=['info']
 )
+
 try: 
     # TODO: Clean string with accents and double/single quotes that can appear in the track_name
     # obtain new_tracks
