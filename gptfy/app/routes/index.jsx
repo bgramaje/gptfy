@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Index() {
   //TODO: Todas estas constantes estan en el .env, ver como cogerlas
-  const SPOTIFY_CLIENT_ID = "b39c9c2f4fa346a69e4cdbcafefd5185";
+  const SPOTIFY_CLIENT_ID = '';
   const SPOTIFY_REDIRECT_URI = 'http://localhost:3000';
   const SPOTIFY_AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const SPOTIFY_RESPONSE_TYPE = 'token';
