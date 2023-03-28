@@ -51,8 +51,8 @@ export default function Recommender() {
  */
 async function initOpenAI() {
   const configuration = new Configuration({
-    organization: "org-f022VjPjLN1TVN07ei2G1TaM",
-    apiKey: "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",
+    organization: '',
+    apiKey: '',
   });
 
   const openai = new OpenAIApi(configuration);
