@@ -1,53 +1,50 @@
-# Welcome to Remix!
+## GPTFY - Generador de playlists de Spotify utilizando ChatGPT
+Este proyecto ha sido desarrollado para la asignatura "Extracción de información desde la red social". Se trata de una aplicación web que utiliza el modelo de lenguaje natural ChatGPT para crear playlists de Spotify en base a las recomendaciones obtenidas.
 
-- [Remix Docs](https://remix.run/docs)
 
-## Development
+## Tecnologías utilizadas
+- **Remix.run**: Framework para el desarrollo de aplicaciones web utilizando React.
+- **Openai API**: Utiliza 'gpt-3.5-turbo' como modelo de lenguaje natural para la generación de texto.
+- **Spotify API**: API de Spotify para la autenticación de usuarios y acceso a sus datos.
 
-From your terminal:
 
-```sh
-npm run dev
-```
+## Estructura del repositorio
+El repositorio tiene dos carpetas:    
+- **gptfy**: Contiene la aplicacion web.    
+- **py-gptfy**: Contiene un script python que implementa una funcionalidad similar.    
+```bash
+.
+└── gptfy/
+    ├── gptfy             <-- contiene la aplicacion web/
+    │   ├── app/
+    │   │   └── ...
+    │   └── .env.sample
+    └── py-gptfy/
+        ├── main.py        <-- script python 
+        ├── .env.sample
+        └── ...
+``` 
 
-This starts your app in development mode, rebuilding assets on file changes.
+## Como ejecutar el proyecto
+1. Clonar el repositorio:
 
-## Deployment
+        git clone https://github.com/tu-usuario/gptfy.git
+2. Accede al directorio /gptfy 
+3. Instalar las dependencias:
 
-First, build your app for production:
+        npm install
+4. Configurar las credenciales de la API de Spotify en un archivo .env en la raíz del proyecto. Hay un ejemplo en el fichero .env.sample con el nombre de las variables necesarias.
+5. Ejecutar el servidor de desarrollo.
 
-```sh
-npm run build
-```
+        npm run dev
 
-Then run the app in production mode:
 
-```sh
-npm start
-```
+## Referencias
+[Remix Docs](https://remix.run/docs)   
+[Spotify Web API](https://developer.spotify.com/documentation/web-api)   
+[Openai API](https://platform.openai.com/docs/api-reference)   
 
-Now you'll need to pick a host to deploy it to.
 
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
-
-### Using a Template
-
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
+## Autores
+[Rafa Esparza](https://github.com/fytta)    
+[Borja Albert](https://github.com/bgramaje)    
