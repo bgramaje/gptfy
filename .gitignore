@@ -1,6 +1,7 @@
-node_modules
+/gptfy/node_modules
+/gptfy/.cache
+/gptfy/build
+/gptfy/public/build
+/gptfy/.env
 
-/.cache
-/build
-/public/build
-.env
+/py-gptfy/.env
