@@ -15,7 +15,7 @@ El repositorio tiene dos carpetas:
 ```bash
 .
 └── gptfy/
-    ├── gptfy             <-- contiene la aplicacion web/
+    ├── gptfy-app          <-- contiene la aplicacion web/
     │   ├── app/
     │   │   └── ...
     │   └── .env.sample
