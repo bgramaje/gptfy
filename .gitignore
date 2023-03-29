@@ -1,7 +1,10 @@
-/gptfy/node_modules
-/gptfy/.cache
-/gptfy/build
-/gptfy/public/build
-/gptfy/.env
+/gptfy-app/node_modules
+/gptfy-app/.cache
+/gptfy-app/build
+/gptfy-app/public/build
+/gptfy-app/.env
 
 /py-gptfy/.env
+
+.env
+.cache
